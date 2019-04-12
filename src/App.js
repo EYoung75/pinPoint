@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
-import './App.scss';
-
-import Navigation from "./components/Navigation.jsx"
+import React, { Component } from "react";
+import "./App.scss";
+import Navigation from "./components/Navigation.jsx";
 
 class App extends Component {
   state = {
@@ -12,12 +11,14 @@ class App extends Component {
     this.setState({
       collapsed: !this.state.collapsed
     });
-  }
+  };
 
   render() {
     return (
       <div className="App">
-        <Navigation toggleNavbar={this.toggleNavbar} {...this.state}/>
+        <div className="home">
+          <Navigation toggleNavbar={this.toggleNavbar} {...this.state} />
+        </div>
       </div>
     );
   }

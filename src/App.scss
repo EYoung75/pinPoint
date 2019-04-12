@@ -1,15 +1,19 @@
 .App{
   text-align: center;
-  background-image: url("https://images.unsplash.com/photo-1536101096688-4a5d6556439a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60");
-  background-size: contain;
-  background-repeat: no-repeat;
   height: 100vh;
   width: 100vw;
-  margin: 0rem 5rem 0rem 5rem;
+  .home {
+    background-image: url("https://media.timeout.com/images/105124787/image.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+    width: 100%;
+    padding: 0rem 2rem;
+  }
 }
 
 .navigation {
-  background-color: rgba(255,255,255, .9);
+  background-color: rgba(255,255,255, .6);
   border-radius: 0rem 0rem 1rem 1rem;
 }
 
