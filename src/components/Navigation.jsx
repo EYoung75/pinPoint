@@ -29,7 +29,7 @@ const Navigation = props => {
               <NavLink href="">Sign-Up</NavLink>
             </NavItem>
             <UncontrolledDropdown nav inNavbar>
-              <DropdownToggle nav caret />
+              <DropdownToggle nav caret>Options</DropdownToggle>
               <DropdownMenu right>
                 <DropdownItem>About</DropdownItem>
                 <DropdownItem>FAQ's</DropdownItem>
