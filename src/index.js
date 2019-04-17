@@ -5,9 +5,10 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router } from "react-router-dom";
+import history from "./history";
 
 ReactDOM.render(
-    <Router>
+    <Router history={history}>
         <App />
     </Router>, document.getElementById('root'));
 

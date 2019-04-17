@@ -28,7 +28,7 @@ const Login = props => {
         </Form>
       </ModalBody>
       <ModalFooter>
-        <Button color="primary" onClick={props.toggleLogin}>
+        <Button color="primary" onClick={props.handleLogin}>
           Login
         </Button>{" "}
       </ModalFooter>
