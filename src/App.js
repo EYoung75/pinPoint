@@ -3,10 +3,14 @@ import "./App.scss";
 import Navigation from "./components/Navigation.jsx";
 import HomeCard from "./components/HomeCard.jsx";
 import { Route } from "react-router-dom";
+import Login from "./components/Login.jsx";
+import SignUp from "./components/SignUp.jsx";
 
 class App extends Component {
   state = {
     collapsed: false,
+    login: false,
+    signUp: false
   };
 
   toggleNavbar = () => {
@@ -14,6 +18,18 @@ class App extends Component {
       collapsed: !this.state.collapsed
     });
   };
+
+  toggleLogin = () => {
+    this.setState({
+      login: !this.state.login
+    })
+  }
+
+  toggleSignUp = () => {
+    this.setState({
+      signUp: !this.state.signUp
+    })
+  }
 
   componentDidMount() {
     fetch(`https://api.foursquare.com/v2/venues/search?client_id=${process.env.REACT_APP_CLIENT_ID}&client_secret=${process.env.REACT_APP_CLIENT_SECRET}&v=20180323&near=Denver,CO&intent=browse&query=food`)
@@ -25,7 +41,9 @@ class App extends Component {
     return (
       <div className="App">
         <div className="home">
-          <Navigation toggleNavbar={this.toggleNavbar} {...this.state} />
+          <Navigation toggleNavbar={this.toggleNavbar} toggleLogin={this.toggleLogin} toggleSignUp={this.toggleSignUp} {...this.state} />
+          <Login {...this.state} toggleLogin={this.toggleLogin}/>
+          <SignUp {...this.state} toggleSignUp={this.toggleSignUp}/>
           <Route path="/" exact component={HomeCard}/>
         </div>
       </div>

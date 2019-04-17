@@ -23,10 +23,10 @@ const Navigation = props => {
         <Collapse isOpen={props.collapsed} navbar>
           <Nav className="ml-auto" navbar>
             <NavItem>
-              <NavLink href="">Login</NavLink>
+              <NavLink onClick={props.toggleLogin}>Login</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="">Sign-Up</NavLink>
+              <NavLink onClick={props.toggleSignUp}>Sign-Up</NavLink>
             </NavItem>
             <UncontrolledDropdown nav inNavbar>
               <DropdownToggle nav caret>Options</DropdownToggle>
