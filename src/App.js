@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./App.scss";
 import Navigation from "./components/Navigation.jsx";
 import HomeCard from "./components/HomeCard.jsx";
+import { Route } from "react-router-dom";
 
 class App extends Component {
   state = {
@@ -25,12 +26,14 @@ class App extends Component {
       <div className="App">
         <div className="home">
           <Navigation toggleNavbar={this.toggleNavbar} {...this.state} />
-          <HomeCard/>
+          <Route path="/" exact component={HomeCard}/>
         </div>
       </div>
     );
   }
 }
+
+
 
 export default App;
 
