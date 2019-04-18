@@ -4,6 +4,7 @@ import Auth from "./auth";
 import history from "./history";
 import Navigation from "./components/Navigation.jsx";
 import HomeCard from "./components/HomeCard.jsx";
+import Results from "./components/Results.jsx";
 import "./App.scss";
 
 const auth = new Auth();
@@ -42,17 +43,17 @@ class Routes extends React.Component {
     })
   };
 
-  componentDidMount() {
-    fetch(
-      `https://api.foursquare.com/v2/venues/search?client_id=${
-        process.env.REACT_APP_CLIENT_ID
-      }&client_secret=${
-        process.env.REACT_APP_CLIENT_SECRET
-      }&v=20180323&near=Denver,CO&intent=browse&query=coffee`
-    )
-      .then(res => res.json())
-      .then(data => console.log(data.response));
-  }
+  // componentDidMount() {
+  //   fetch(
+  //     `https://api.foursquare.com/v2/venues/search?client_id=${
+  //       process.env.REACT_APP_CLIENT_ID
+  //     }&client_secret=${
+  //       process.env.REACT_APP_CLIENT_SECRET
+  //     }&v=20180323&near=Denver,CO&intent=browse&query=coffee`
+  //   )
+  //     .then(res => res.json())
+  //     .then(data => console.log(data.response));
+  // }
 
   handleSearchInput = (e) => {
     this.setState({
@@ -107,6 +108,7 @@ class Routes extends React.Component {
                 return <HomeCard auth={auth} {...props} />;
               }}
             />
+            <Route path="/results" render={() => <Results {...this.state}/>}/>
           </div>
         </div>
       </Router>
