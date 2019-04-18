@@ -17,7 +17,9 @@ const handleAuthentication = (nextState, replace) => {
 class Routes extends React.Component {
   state = {
     collapsed: false,
-    loggedIn: false
+    loggedIn: false,
+    search: "",
+    results: []
   };
 
   toggleNavbar = () => {
@@ -52,6 +54,29 @@ class Routes extends React.Component {
       .then(data => console.log(data.response));
   }
 
+  handleSearchInput = (e) => {
+    this.setState({
+      search: e.target.value
+    })
+    console.log(this.state.search)
+  }
+
+  fetchSearch = () => {
+    fetch(
+      `https://api.foursquare.com/v2/venues/search?client_id=${
+        process.env.REACT_APP_CLIENT_ID
+      }&client_secret=${
+        process.env.REACT_APP_CLIENT_SECRET
+      }&v=20180323&near=Denver,CO&intent=browse&query=${this.state.search}`
+    )
+      .then(res => res.json())
+      .then(data => this.setState({
+        results: data.response.venues
+      }))
+      .then(console.log(this.state.results))
+      
+  }
+
   render() {
     return (
       <Router history={history} component={HomeCard}>
@@ -63,6 +88,8 @@ class Routes extends React.Component {
               handleLogout={this.handleLogout}
               auth={auth}
               {...this.state}
+              handleSearchInput={this.handleSearchInput}
+              fetchSearch={this.fetchSearch}
             />
             <Route
               exact
