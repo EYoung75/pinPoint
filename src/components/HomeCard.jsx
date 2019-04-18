@@ -1,5 +1,5 @@
 import React from "react";
-import { Jumbotron, Button, Container, Card, CardBody, CardTitle } from "reactstrap";
+import { Jumbotron, Button, Container } from "reactstrap";
 
 const HomeCard = () => {
   return (

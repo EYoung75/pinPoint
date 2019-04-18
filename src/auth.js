@@ -3,15 +3,11 @@ import history from "./history";
 
 export default class Auth {
   auth0 = new auth0.WebAuth({
-    domain: "pin-point-auth.auth0.com",
-    clientID: "b2w5xjZXxcPNfAmFY0y78jwvUVEKFlYn",
-    redirectUri:
-      process.env.NODE_ENV === "development"
-        ? "http://localhost:3000/callback"
-        : "",
-    audience: "https://pin-point-auth.auth0.com/userinfo",
-    responseType: "token id_token",
-    scope: "openid"
+    domain: 'pin-point-auth.auth0.com',
+    clientID: 'b2w5xjZXxcPNfAmFY0y78jwvUVEKFlYn',
+    redirectUri: 'http://localhost:3000/home',
+    responseType: 'token id_token',
+    scope: 'openid'
   });
 
   login = () => {
@@ -22,9 +18,9 @@ export default class Auth {
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
         this.setSession(authResult);
-        history.replace("/");
+        history.replace("/home");
       } else if (err) {
-        history.replace("/");
+        history.replace("/error");
         console.log(err);
       }
     });
@@ -37,7 +33,7 @@ export default class Auth {
     localStorage.setItem("access_token", authResult.accessToken);
     localStorage.setItem("id_token", authResult.idToken);
     localStorage.setItem("expires_at", expiresAt);
-    history.replace("/");
+    history.replace("/home");
   };
 
   logout = () => {

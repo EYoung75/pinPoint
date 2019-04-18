@@ -15,6 +15,7 @@ import {
 } from "reactstrap";
 
 const Navigation = props => {
+  const { isAuthenticated } = props.auth;
   return (
     <Container className={"navigation"}>
       <Navbar light expand="md">
@@ -22,12 +23,15 @@ const Navigation = props => {
         <NavbarToggler onClick={props.toggleNavbar} />
         <Collapse isOpen={props.collapsed} navbar>
           <Nav className="ml-auto" navbar>
+            { props.loggedIn === false ? 
             <NavItem>
-              <NavLink onClick={props.toggleLogin}>Login</NavLink>
+              <NavLink onClick={props.handleLogin}>Login | Sign-Up</NavLink>
             </NavItem>
+            :
             <NavItem>
-              <NavLink onClick={props.toggleSignUp}>Sign-Up</NavLink>
+              <NavLink onClick={props.handleLogout}>Logout</NavLink>
             </NavItem>
+            }
             <UncontrolledDropdown nav inNavbar>
               <DropdownToggle nav caret>Options</DropdownToggle>
               <DropdownMenu right>

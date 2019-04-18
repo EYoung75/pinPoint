@@ -3,8 +3,6 @@ import "./App.scss";
 import Navigation from "./components/Navigation.jsx";
 import HomeCard from "./components/HomeCard.jsx";
 import { Route } from "react-router-dom";
-import Login from "./components/Login.jsx";
-import SignUp from "./components/SignUp.jsx";
 import Callback from "./Callback";
 import Auth from "./auth";
 
@@ -19,8 +17,7 @@ const handleAuthentication = (nextState, replace) => {
 class App extends Component {
   state = {
     collapsed: false,
-    login: true,
-    signUp: false
+    user: false
   };
 
   toggleNavbar = () => {
@@ -29,21 +26,19 @@ class App extends Component {
     });
   };
 
-  toggleLogin = () => {
-    this.setState({
-      login: !this.state.login
-    });
-  };
-
   handleLogin = () => {
-    auth.login()
+    auth.login();
+    this.setState({
+      user: true
+    })
   }
 
-  toggleSignUp = () => {
+  handleLogout = () => {
+    auth.logout();
     this.setState({
-      signUp: !this.state.signUp
-    });
-  };
+      user: false
+    })
+  }
 
   componentDidMount() {
     fetch(
@@ -58,30 +53,20 @@ class App extends Component {
   }
 
   render() {
-    const { isAuthenticated } = auth;
-
     return (
       <div className="App">
         <div className="home">
           <Navigation
             toggleNavbar={this.toggleNavbar}
-            toggleLogin={this.toggleLogin}
-            toggleSignUp={this.toggleSignUp}
+            handleLogin={this.handleLogin}
+            handleLogout={this.handleLogout}
+            auth={auth}
             {...this.state}
           />
-          <Login {...this.state} toggleLogin={this.toggleLogin} handleLogin={this.handleLogin}/>
-          <SignUp {...this.state} toggleSignUp={this.toggleSignUp} />
           <Route
             path="/"
             exact
-            render={props => <HomeCard auth={auth} {...props} />}
-          />
-          <Route
-            path="/callback"
-            render={props => {
-              handleAuthentication(props);
-              return <Callback {...props} />;
-            }}
+            render={props => {handleAuthentication(props); return <HomeCard auth={auth} {...props} />}}
           />
         </div>
       </div>
