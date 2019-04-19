@@ -8,6 +8,8 @@ import {
   CardSubtitle,
   Button
 } from "reactstrap";
+import Geolocate from "./Geolocate.jsx";
+
 
 const Results = props => {
   const venues = props.results.map(venue => {
@@ -32,6 +34,7 @@ const Results = props => {
   });
   return (
     <div className="results">
+      <Geolocate/>
       {venues}
     </div>
   );

@@ -20,7 +20,11 @@ class Routes extends React.Component {
     collapsed: false,
     loggedIn: false,
     search: "",
-    results: []
+    results: [],
+    location: {
+      lat: 0,
+      lng: 0
+    }
   };
 
   toggleNavbar = () => {
