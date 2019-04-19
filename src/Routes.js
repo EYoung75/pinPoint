@@ -6,6 +6,7 @@ import Navigation from "./components/Navigation.jsx";
 import HomeCard from "./components/HomeCard.jsx";
 import Results from "./components/Results.jsx";
 import "./App.scss";
+import {geolocated} from 'react-geolocated';
 
 const auth = new Auth();
 
@@ -21,10 +22,8 @@ class Routes extends React.Component {
     loggedIn: false,
     search: "",
     results: [],
-    location: {
-      lat: 0,
-      lng: 0
-    }
+    lat: 0,
+    long: 0
   };
 
   toggleNavbar = () => {
@@ -59,11 +58,19 @@ class Routes extends React.Component {
   //     .then(data => console.log(data.response));
   // }
 
+  componentDidMount() {
+      if(this.props.coords !== null) {
+        this.setState({
+          lat: this.props.coords.lat,
+          long: this.props.coords.long
+        })
+      }
+  } 
+
   handleSearchInput = (e) => {
     this.setState({
       search: e.target.value
     })
-    console.log(this.state.search)
   }
 
   fetchSearch = () => {
@@ -81,6 +88,7 @@ class Routes extends React.Component {
       .then(console.log(this.state.results))
       
   }
+  
 
   render() {
     return (
@@ -96,6 +104,19 @@ class Routes extends React.Component {
               handleSearchInput={this.handleSearchInput}
               fetchSearch={this.fetchSearch}
             />
+            {/* {!this.props.isGeolocationAvailable
+      ? <div>Your browser does not support Geolocation</div>
+      : !this.props.isGeolocationEnabled
+        ? <div>Geolocation is not enabled</div>
+        : this.props.coords
+          ? <table>
+            <tbody>
+              <tr><td>latitude</td><td>{this.props.coords.latitude}</td></tr>
+              <tr><td>longitude</td><td>{this.props.coords.longitude}</td></tr>
+              <tr><td>altitude</td><td>{this.props.coords.altitude}</td></tr>
+            </tbody>
+          </table>
+          : <div>Getting the location data&hellip; </div>} */}
             <Route
               exact
               path="/"
@@ -120,4 +141,9 @@ class Routes extends React.Component {
   }
 }
 
-export default Routes;
+export default geolocated({
+  positionOptions: {
+    enableHighAccuracy: false,
+  },
+  userDecisionTimeout: 5000,
+})(Routes);
