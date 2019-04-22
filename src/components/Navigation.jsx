@@ -20,7 +20,7 @@ import {
 
 const Navigation = props => {
   const { isAuthenticated } = props.auth;
-  console.log(props.lat)
+  const userLocation = {lat: props.lat, long: props.long}
   return (
     <Container className={"navigation"}>
       <Navbar light expand="md">
@@ -31,7 +31,7 @@ const Navigation = props => {
             <NavItem>
               <InputGroup>
                 <InputGroupAddon addonType="prepend">
-                  <Button onClick={props.fetchSearch}>Search</Button>
+                  <Button onClick={() => props.fetchSearch(userLocation)}>Search</Button>
                 </InputGroupAddon>
                 <Input placeholder="Enter keywords" onChange={props.handleSearchInput}/>
               </InputGroup>
