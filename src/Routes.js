@@ -81,7 +81,7 @@ class Routes extends React.Component {
         process.env.REACT_APP_CLIENT_ID
       }&client_secret=${
         process.env.REACT_APP_CLIENT_SECRET
-      }&v=20180323&ll=${lat},${long}&query=${this.state.search}`
+      }&v=20180323&ll=${lat},${long}&radius=1000&query=${this.state.search}`
     )
       .then(res => res.json())
       .then(data =>
