@@ -20,6 +20,7 @@ import {
 
 const Navigation = props => {
   const { isAuthenticated } = props.auth;
+  console.log(props.lat)
   return (
     <Container className={"navigation"}>
       <Navbar light expand="md">
