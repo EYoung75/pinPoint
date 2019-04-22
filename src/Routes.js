@@ -22,7 +22,6 @@ class Routes extends React.Component {
     loggedIn: false,
     search: "",
     results: [],
-    userLocation: {}
   };
 
   toggleNavbar = () => {
@@ -73,15 +72,15 @@ class Routes extends React.Component {
   };
 
   fetchSearch = (userLocation) => {
-    const lat = userLocation.lat.toFixed(4)
-    const long = userLocation.long.toFixed(4)
+    const lat = userLocation.lat
+    const long = userLocation.long
     console.log(lat, long)
     fetch(
       `https://api.foursquare.com/v2/venues/search?client_id=${
         process.env.REACT_APP_CLIENT_ID
       }&client_secret=${
         process.env.REACT_APP_CLIENT_SECRET
-      }&v=20180323&ll=${lat},${long}&radius=1000&query=${this.state.search}`
+      }&v=20180323&ll=${lat},${long}&llAcc=10000&radius=1000&query=${this.state.search}`
     )
       .then(res => res.json())
       .then(data =>
