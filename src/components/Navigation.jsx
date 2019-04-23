@@ -24,7 +24,7 @@ const Navigation = props => {
   return (
     <Container className={"navigation"}>
       <Navbar light expand="md">
-        <NavbarBrand href="/">PinPoint | Denver</NavbarBrand>
+        <NavbarBrand href="/">PinPoint</NavbarBrand>
         <NavbarToggler onClick={props.toggleNavbar} />
         <Collapse isOpen={props.collapsed} navbar>
           <Nav className="ml-auto" navbar>
@@ -36,7 +36,7 @@ const Navigation = props => {
                 <Input placeholder="Enter keywords" onChange={props.handleSearchInput}/>
               </InputGroup>
             </NavItem>
-            {props.loggedIn === false ? (
+            {/* {props.loggedIn === false ? (
               <NavItem>
                 <NavLink onClick={props.handleLogin}>Login | Sign-Up</NavLink>
               </NavItem>
@@ -44,7 +44,7 @@ const Navigation = props => {
               <NavItem>
                 <NavLink onClick={props.handleLogout}>Logout</NavLink>
               </NavItem>
-            )}
+            )} */}
             <UncontrolledDropdown nav inNavbar>
               <DropdownToggle nav caret>
                 Options

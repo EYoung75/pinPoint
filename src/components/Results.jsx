@@ -20,11 +20,11 @@ const Results = props => {
             alt="Card image cap"
           /> */}
           <CardBody>
-            <CardTitle><h4><u>Name:</u></h4>{venue.name}</CardTitle>
-            {venue.location.address === undefined ? "This listing does not include an address" : <CardSubtitle><h5><u>Address:</u></h5><a href={"https://maps.google.com/?q="+venue.location.address}>{venue.location.address}</a></CardSubtitle>}
+            <CardTitle><u><b>{venue.name}</b></u></CardTitle>
             <CardText>
-              {venue.categories !== undefined || null ?  " " : `${venue.categories[0].name}`}
+              {venue.categories === undefined || null ?  " " : `${venue.categories[0].name}`}
             </CardText>
+            {venue.location.address === undefined ? "This listing does not include an address" : <CardSubtitle><h5><u>Address:</u></h5><a href={"https://maps.google.com/?q=" + venue.location.address}>{venue.location.address}</a></CardSubtitle>}
             <Button>Menu</Button>
           </CardBody>
         </Card>
@@ -32,7 +32,7 @@ const Results = props => {
   });
   return (
     <div className="results">
-      {venues ? venues : <h4>There were no results found containing part or all of the keyword you searched for. Please try another.</h4>}
+      {venues.length !== 0 ? venues : <h4>There were no results found containing part or all of the keyword you searched for. Please try another.</h4>}
     </div>
   );
 };

@@ -21,7 +21,7 @@ class Routes extends React.Component {
     collapsed: false,
     loggedIn: false,
     search: "",
-    results: [],
+    results: []
   };
 
   toggleNavbar = () => {
@@ -44,18 +44,6 @@ class Routes extends React.Component {
     });
   };
 
-  // componentDidMount() {
-  //   fetch(
-  //     `https://api.foursquare.com/v2/venues/search?client_id=${
-  //       process.env.REACT_APP_CLIENT_ID
-  //     }&client_secret=${
-  //       process.env.REACT_APP_CLIENT_SECRET
-  //     }&v=20180323&near=Denver,CO&intent=browse&query=coffee`
-  //   )
-  //     .then(res => res.json())
-  //     .then(data => console.log(data.response));
-  // }
-
   componentDidMount() {
     if (this.props.coords !== null) {
       this.setState({
@@ -71,25 +59,28 @@ class Routes extends React.Component {
     });
   };
 
-  fetchSearch = (userLocation) => {
-    const lat = userLocation.lat
-    const long = userLocation.long
-    console.log(lat, long)
+  fetchSearch = userLocation => {
+    const lat = userLocation.lat;
+    const long = userLocation.long;
+    console.log(lat, long);
     fetch(
       `https://api.foursquare.com/v2/venues/search?client_id=${
         process.env.REACT_APP_CLIENT_ID
       }&client_secret=${
         process.env.REACT_APP_CLIENT_SECRET
-      }&v=20180323&ll=${lat},${long}&llAcc=10000&radius=1000&query=${this.state.search}`
+      }&v=20180323&ll=${lat},${long}&llAcc=10000&radius=1000&intent=browse&query=${
+        this.state.search
+      }`
     )
       .then(res => res.json())
       .then(data =>
         this.setState({
           results: data.response.venues,
-          collapsed: false,
+          collapsed: false
         })
       )
       .then(console.log(this.state.results))
+      .then()
   };
 
   render() {
