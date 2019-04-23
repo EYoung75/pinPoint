@@ -85,10 +85,11 @@ class Routes extends React.Component {
       .then(res => res.json())
       .then(data =>
         this.setState({
-          results: data.response.venues
+          results: data.response.venues,
+          collapsed: false,
         })
       )
-      .then(console.log(this.state.results));
+      .then(console.log(this.state.results))
   };
 
   render() {

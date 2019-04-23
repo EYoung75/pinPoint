@@ -6,7 +6,7 @@
     background-image: url("https://media.timeout.com/images/105124787/image.jpg");
     background-size: cover;
     background-repeat: no-repeat;
-    height: 100%;
+    height: auto;
     width: 100%;
     flex: 1;
 
@@ -26,8 +26,17 @@
         flex-wrap: wrap;
         margin-right: 2rem;
       }
+    }  
+    
+    .results {
+      height: auto;
+      padding: 2rem;
 
-    }    
+      .result {
+        margin: 1rem;
+        border: solid black 2px;
+      }
+    }
   }
   
 }
