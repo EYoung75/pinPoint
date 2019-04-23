@@ -22,9 +22,9 @@ const Results = props => {
           <CardBody>
             <CardTitle><u><b>{venue.name}</b></u></CardTitle>
             <CardText>
-              {venue.categories === undefined || null ?  " " : `${venue.categories[0].name}`}
+              {venue.categories[0] === undefined || null ?  " " : `${venue.categories[0].name}`}
             </CardText>
-            {venue.location.address === undefined ? "This listing does not include an address" : <CardSubtitle><h5><u>Address:</u></h5><a href={"https://maps.google.com/?q=" + venue.location.address}>{venue.location.address}</a></CardSubtitle>}
+            {venue.location.address === undefined ? "Address not listed" : <CardSubtitle><h5><u>Address:</u></h5><a href={"https://maps.google.com/?q=" + venue.location.address}>{venue.location.address}</a></CardSubtitle>}
             <Button>Menu</Button>
           </CardBody>
         </Card>

@@ -80,8 +80,26 @@ class Routes extends React.Component {
         })
       )
       .then(console.log(this.state.results))
-      .then()
+      .then(this.fetchRecs(userLocation))
   };
+
+  fetchRecs = (userLocation) => {
+    const lat = userLocation.lat;
+    const long = userLocation.long;
+    const related = this.state.results.find(place => {
+      return place.categories[0].name !== undefined
+    })
+    let results;
+    fetch(`https://api.foursquare.com/v2/venues/explore?client_id=${
+      process.env.REACT_APP_CLIENT_ID
+    }&client_secret=${
+      process.env.REACT_APP_CLIENT_SECRET
+    }&v=20180323&ll=${lat},${long}`)
+    .then(res => res.json())
+    .then(data => console.log(data.response))
+    // .then(data => results = data.response)
+    // .then(console.log(results))
+  }
 
   render() {
     return (
