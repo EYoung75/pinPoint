@@ -34,6 +34,7 @@ const Navigation = props => {
                   <Button onClick={() => props.fetchSearch(userLocation)}>Search</Button>
                 </InputGroupAddon>
                 <Input placeholder="Enter keywords" onChange={props.handleSearchInput}/>
+                {/* <Input placeholder="Enter location to be searched" onChange={props.handleSearchInput}/> */}
               </InputGroup>
             </NavItem>
             {/* {props.loggedIn === false ? (

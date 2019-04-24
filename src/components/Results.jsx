@@ -12,7 +12,7 @@ import {
 const Results = props => {
   const venues = props.results.map(venue => {
     return (
-        <Card className={"result"}>
+        <Card className={"result"} key={venue.id}>
           {/* <CardImg
             top
             width="100%"

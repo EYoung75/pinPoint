@@ -21,7 +21,9 @@ class Routes extends React.Component {
     collapsed: false,
     loggedIn: false,
     search: "",
-    results: []
+    results: [],
+    related: [],
+    searchLoc: ""
   };
 
   toggleNavbar = () => {
@@ -59,6 +61,12 @@ class Routes extends React.Component {
     });
   };
 
+  handleSearchLoc = e => {
+    this.setState({
+      searchLoc: e.target.value
+    })
+  }
+
   fetchSearch = userLocation => {
     const lat = userLocation.lat;
     const long = userLocation.long;
@@ -79,26 +87,22 @@ class Routes extends React.Component {
           collapsed: false
         })
       )
-      .then(console.log(this.state.results))
       .then(this.fetchRecs(userLocation))
   };
 
   fetchRecs = (userLocation) => {
-    const lat = userLocation.lat;
-    const long = userLocation.long;
-    const related = this.state.results.find(place => {
-      return place.categories[0].name !== undefined
-    })
-    let results;
-    fetch(`https://api.foursquare.com/v2/venues/explore?client_id=${
+    let related = this.state.results
+    fetch(`https://api.foursquare.com/v2/venues/search?client_id=${
       process.env.REACT_APP_CLIENT_ID
     }&client_secret=${
       process.env.REACT_APP_CLIENT_SECRET
-    }&v=20180323&ll=${lat},${long}`)
+    }&v=20180323&ll=${userLocation.lat},${userLocation.long}`)
     .then(res => res.json())
-    .then(data => console.log(data.response))
-    // .then(data => results = data.response)
-    // .then(console.log(results))
+    .then(data => this.setState({
+      related: data.response.venues
+    }))
+    .then(console.log(this.state.related.filter(result => result.categories[0].name == "Coffee shop")))
+    
   }
 
   render() {
@@ -134,6 +138,7 @@ class Routes extends React.Component {
                 auth={auth}
                 {...this.state}
                 handleSearchInput={this.handleSearchInput}
+                handleSearchLoc={this.handleSearchLoc}
                 fetchSearch={this.fetchSearch}
                 lat={this.props.coords.latitude}
                 long={this.props.coords.longitude}
